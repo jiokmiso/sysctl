@@ -58,7 +58,7 @@ module SysctlCookbook
       end
 
       def set_sysctl_param(key, value)
-        o = shell_out("sysctl -w \"#{key}=#{value}\"")
+        o = shell_out("sysctl #{'-e ' if node['sysctl']['ignore_error']}-w \"#{key}=#{value}\"")
         return false if o.error!
         true
       end
